@@ -294,5 +294,6 @@ async def slash_news(interaction: discord.Interaction, country: str = "in", topi
     await interaction.followup.send(embed=embed)
 
 # ─── Run the Bot ─────────────────────────────────────────────────────────────
-# webserver.keep_alive()
+webserver.keep_alive()
 bot.run(TOKEN)
+
