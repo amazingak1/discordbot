@@ -218,6 +218,17 @@ async def uptime(ctx):
     await ctx.send(f"⏱️ Bot has been running for: **{uptime_str}**")
 
 @bot.command()
+async def poll(ctx, question: str, *options: str):
+    if len(options) < 2:
+        return await ctx.send("You need at least two options to create a poll.")
+    
+    embed = discord.Embed(title=question, description="\n".join([f"{i+1}. {option}" for i, option in enumerate(options)]))
+    message = await ctx.send(embed=embed)
+    for i in range(len(options)):
+        await message.add_reaction(str(i+1))
+
+
+@bot.command()
 async def helpme(ctx):
     embed = discord.Embed(
         title="📚 Bot Commands",
@@ -264,4 +275,6 @@ async def slash_meme(interaction: discord.Interaction):
     await interaction.followup.send(embed=embed)
 
 # ─── Run Bot ─────────────────────────────────────────────────────────────────
+webserver.keep.alive()
 bot.run(TOKEN)
+
