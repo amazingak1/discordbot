@@ -1,0 +1,5 @@
+aiohttp
+discord
+discord.py
+os
+google.genrativeai

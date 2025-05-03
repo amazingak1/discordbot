@@ -8,6 +8,8 @@ import discord
 from discord.ext import commands, tasks
 from discord import app_commands
 import datetime
+import webserver
+
 
 # ─── Start Time ─────────────────────────────────────────────────────────────
 start_time = datetime.datetime.utcnow()
@@ -17,6 +19,7 @@ uptime_message = None
 TOKEN = os.getenv("TOKEN")
 NEWS_API_KEY = os.getenv("NEWS")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
 
 SUPPORT_CHANNEL_ID = 1367611989219741707
 UPTIME_CHANNEL_ID = 915291246396833832
@@ -291,4 +294,5 @@ async def slash_news(interaction: discord.Interaction, country: str = "in", topi
     await interaction.followup.send(embed=embed)
 
 # ─── Run the Bot ─────────────────────────────────────────────────────────────
+# webserver.keep_alive()
 bot.run(TOKEN)
