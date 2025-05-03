@@ -17,7 +17,7 @@ uptime_message = None
 
 # ─── Environment Variables ───────────────────────────────────────────────────
 TOKEN = os.getenv("TOKEN")
-NEWS_API_KEY = os.getenv("NEWS")
+# NEWS_API_KEY = os.getenv("NEWS")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 
@@ -171,9 +171,9 @@ async def ask(ctx, *, question: str):
     except Exception as e:
         await ctx.send(f"❌ Error: {e}")
 
-@bot.command()
-async def resetchat(ctx):
-    await ctx.send("🔄 Chat session has been reset!")
+# @bot.command()
+# async def resetchat(ctx):
+#     await ctx.send("🔄 Chat session has been reset!")
 
 @bot.command()
 async def remindme(ctx, time: str, *, reminder: str):
@@ -266,32 +266,32 @@ async def slash_meme(interaction: discord.Interaction):
     embed.set_image(url=data["url"])
     await interaction.followup.send(embed=embed)
 
-@tree.command(name="news", description="Get latest news by country & topic")
-@app_commands.describe(
-    country="Country code: in, us, gb, etc.",
-    topic="Category: business, entertainment, health, science, sports, technology"
-)
-async def slash_news(interaction: discord.Interaction, country: str = "in", topic: str = "general"):
-    await interaction.response.defer()
-    url = f"https://newsapi.org/v2/top-headlines?country={country}&category={topic}&apiKey={NEWS_API_KEY}"
-    async with aiohttp.ClientSession() as session:
-        async with session.get(url) as resp:
-            if resp.status != 200:
-                return await interaction.followup.send("❌ Failed to fetch news.")
-            data = await resp.json()
-    articles = data.get("articles") or []
-    if not articles:
-        return await interaction.followup.send(f"❌ No news for `{country}`, `{topic}`.")
-    art = articles[0]
-    embed = discord.Embed(
-        title=art["title"],
-        url=art["url"],
-        description=art.get("description", "No description."),
-        color=discord.Color.blue()
-    )
-    if art.get("urlToImage"):
-        embed.set_image(url=art["urlToImage"])
-    await interaction.followup.send(embed=embed)
+# @tree.command(name="news", description="Get latest news by country & topic")
+# @app_commands.describe(
+#     country="Country code: in, us, gb, etc.",
+#     topic="Category: business, entertainment, health, science, sports, technology"
+# )
+# async def slash_news(interaction: discord.Interaction, country: str = "in", topic: str = "general"):
+#     await interaction.response.defer()
+#     url = f"https://newsapi.org/v2/top-headlines?country={country}&category={topic}&apiKey={NEWS_API_KEY}"
+#     async with aiohttp.ClientSession() as session:
+#         async with session.get(url) as resp:
+#             if resp.status != 200:
+#                 return await interaction.followup.send("❌ Failed to fetch news.")
+#             data = await resp.json()
+#     articles = data.get("articles") or []
+#     if not articles:
+#         return await interaction.followup.send(f"❌ No news for `{country}`, `{topic}`.")
+#     art = articles[0]
+#     embed = discord.Embed(
+#         title=art["title"],
+#         url=art["url"],
+#         description=art.get("description", "No description."),
+#         color=discord.Color.blue()
+#     )
+#     if art.get("urlToImage"):
+#         embed.set_image(url=art["urlToImage"])
+#     await interaction.followup.send(embed=embed)
 
 # ─── Run the Bot ─────────────────────────────────────────────────────────────
 webserver.keep_alive()
