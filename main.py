@@ -230,7 +230,7 @@ async def helpme(ctx):
     embed.add_field(name="🎯 Basic", value="`!hello`, `!ping`, `!echo <msg>`, `!info`", inline=False)
     embed.add_field(name="🧠 Gemini", value="`!ask <query>`, `!resetchat`", inline=False)
     embed.add_field(name="📅 Scheduling", value="`!remindme`, `!schedule`", inline=False)
-    embed.add_field(name="📊 Attendance", value="`!attendance <total> <attended>`", inline=False)
+    embed.add_field(name="📊 Attendance", value="`!at <total> <attended>`", inline=False)
     embed.add_field(name="📬 Messaging", value="`!send`, `!dm`", inline=False)
     embed.add_field(name="🕒 Uptime", value="`!uptime`", inline=False)
     embed.set_footer(text="Use `/` for slash commands too!")
