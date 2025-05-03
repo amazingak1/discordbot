@@ -275,6 +275,6 @@ async def slash_meme(interaction: discord.Interaction):
     await interaction.followup.send(embed=embed)
 
 # ─── Run Bot ─────────────────────────────────────────────────────────────────
-webserver.keep.alive()
+webserver.keep_alive()
 bot.run(TOKEN)
 
