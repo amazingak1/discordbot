@@ -141,6 +141,18 @@ async def echo(interaction: discord.Interaction, message: str):
         return
     await interaction.response.send_message(message)
 
+@tree.command(name="avatar", description="Get a user's avatar")
+@app_commands.describe(user="The user to get avatar of (optional)")
+async def avatar(interaction: discord.Interaction, user: discord.User = None):
+    user = user or interaction.user  # Defaults to command user
+    avatar_url = user.avatar.url if user.avatar else user.default_avatar.url
+
+    embed = discord.Embed(title=f"{user.name}'s Avatar", color=discord.Color.blurple())
+    embed.set_image(url=avatar_url)
+
+    await interaction.response.send_message(embed=embed)
+
+
 @bot.command()
 async def info(ctx):
     embed = discord.Embed(
