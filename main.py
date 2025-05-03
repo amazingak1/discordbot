@@ -28,8 +28,8 @@ if not TOKEN:
     raise ValueError("❌ Discord bot TOKEN is missing from environment variables.")
 if not GEMINI_API_KEY:
     raise ValueError("❌ GEMINI_API_KEY is missing from environment variables.")
-if not NEWS_API_KEY:
-    raise ValueError("❌ NEWS_API_KEY is missing from environment variables.")
+# if not NEWS_API_KEY:
+#     raise ValueError("❌ NEWS_API_KEY is missing from environment variables.")
 
 genai.configure(api_key=GEMINI_API_KEY)
 
