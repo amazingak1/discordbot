@@ -133,8 +133,13 @@ async def ping(ctx):
     await ctx.send(f'🏓 Pong! Latency: {latency}ms')
 
 @bot.command()
-async def echo(ctx, *, message: str):
-    await ctx.send(message)
+# async def echo(ctx, *, message: str):
+#     await ctx.send(message)
+async def echo(interaction: discord.Interaction, message: str):
+    if "@everyone" in message or "@here" in message:
+        await interaction.response.send_message("You can't use @everyone or @here in this command.", ephemeral=True)
+        return
+    await interaction.response.send_message(message)
 
 @bot.command()
 async def info(ctx):
@@ -245,13 +250,23 @@ async def helpme(ctx):
     await ctx.send(embed=embed)
 
 # ─── Slash Commands ──────────────────────────────────────────────────────────
-@tree.command(name="send", description="Send a message to any channel")
-async def slash_send(interaction: discord.Interaction, channel: discord.TextChannel, message: str):
-    try:
-        await channel.send(message)
-        await interaction.response.send_message(f"✅ Message sent to {channel.mention}", ephemeral=True)
-    except Exception as e:
-        await interaction.response.send_message(f"❌ Error: {e}", ephemeral=True)
+# @tree.command(name="send", description="Send a message to any channel")
+# async def slash_send(interaction: discord.Interaction, channel: discord.TextChannel, message: str):
+#     try:
+#         await channel.send(message)
+#         await interaction.response.send_message(f"✅ Message sent to {channel.mention}", ephemeral=True)
+#     except Exception as e:
+#         await interaction.response.send_message(f"❌ Error: {e}", ephemeral=True)
+@bot.tree.command(name="send", description="Send a message to a specific channel.")
+@app_commands.describe(channel="The channel to send to", message="The message to send")
+async def send(interaction: discord.Interaction, channel: discord.TextChannel, message: str):
+    if not interaction.user.guild_permissions.administrator:
+        await interaction.response.send_message("You need admin permissions to use this command.", ephemeral=True)
+        return
+    await channel.send(message)
+    await interaction.response.send_message(f"Message sent to {channel.mention}", ephemeral=True)
+
+
 
 @tree.command(name="avatar", description="Get a user's avatar")
 async def slash_avatar(interaction: discord.Interaction, user: discord.User = None):
