@@ -35,8 +35,7 @@ Includes features like polls, reminders, memes, subreddit integration, Gemini AI
 - `/meme` — Sends a random meme from the r/FingMemes subreddit.
 - `!avatar [user]` — Shows avatar of the mentioned user (or yours).
 - `!r <subreddit> [count]` — Sends images from a specified subreddit.
-- `!nsfw <subreddit> [count]` — Sends NSFW content (image, video, gif) in NSFW channels only.
-- `!foodporn` — Delicious food pics from the subreddit.
+- `!food` — Delicious food pics from the subreddit.
 
 ### 📬 Messaging
 - `!send <#channel> <message>` — Send messages to a channel (admin only).
@@ -44,10 +43,9 @@ Includes features like polls, reminders, memes, subreddit integration, Gemini AI
 
 ### 💡 AI Integration (Gemini)
 - `!ask <query>` — Ask the Gemini AI a question.
-- `!resetchat` — Reset the conversation thread with Gemini.
 
 ### 📊 Attendance Calculator
-- `!attendance <total_classes> <attended>` — Find how many classes you can miss and still have 75% attendance.
+- `!attendance/at <total_classes> <attended>` — Find how many classes you can miss and still have 75% attendance.
 
 ---
 
