@@ -1,8 +1,3 @@
-# SUPPORT_CHANNEL_ID = 1367611989219741707
-# UPTIME_CHANNEL_ID = 915291246396833832
-# LOG_CHANNEL_ID = 1368296589583585361  
-
-
 import os
 import re
 import math
@@ -24,10 +19,10 @@ uptime_message = None
 # ─── Environment Variables ───────────────────────────────────────────────────
 TOKEN = os.getenv("TOKEN")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-
+#replace with your main server channel ids
 SUPPORT_CHANNEL_ID = 1367611989219741707
 UPTIME_CHANNEL_ID = 915291246396833832
-LOG_CHANNEL_ID = 1368296589583585361  # Replace with your log channel ID
+LOG_CHANNEL_ID = 1368296589583585361  
 
 if not TOKEN:
     raise ValueError("❌ Discord bot TOKEN is missing from environment variables.")
