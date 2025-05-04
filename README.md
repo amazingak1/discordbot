@@ -1,7 +1,7 @@
 ## 🛠️ Looking for Contributors: ModMail Feature
 I'm currently looking for someone to help implement a ModMail system in this Discord bot.
 
-###🔧 Feature Description:
+##🔧 Feature Description:
 * Allow users to DM the bot and create a private thread or channel in a server (ModMail).
 * Allow moderators to reply from the server channel, and the bot should forward messages back to the user's DMs.
 * Optional: Support message logging, user blacklist, or mod-only reply options.
