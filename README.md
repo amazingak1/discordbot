@@ -47,3 +47,26 @@ Includes features like polls, reminders, memes, subreddit integration, Gemini AI
    ```bash
    git clone https://github.com/yourusername/yourbotname.git
    cd yourbotname
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   
+3. Set up your `.env` file or directly add your Discord token in the config section.
+4. Run the bot:
+   ```bash
+   python bot.py
+
+# 📌 To-Do / Upcoming Features
+* Custom prefix support
+* Logging system
+* Persistent reminders
+* Slash command expansion
+* Moderation utilities
+
+# 🧠 Tech Stack
+* Python 3.10+
+* discord.py 
+* Flask (optional web features)
+* Google Gemini API
+* Reddit JSON API
