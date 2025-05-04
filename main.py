@@ -375,7 +375,76 @@ async def slash_meme(interaction: discord.Interaction):
     embed = discord.Embed(title=data["title"], color=discord.Color.random())
     embed.set_image(url=data["url"])
     await interaction.followup.send(embed=embed)
-    
+
+
+@bot.command()
+async def r(ctx, subreddit: str):
+    """Fetches a random top post from the specified subreddit."""
+    url = f"https://www.reddit.com/r/{subreddit}/top.json?limit=50&t=day"
+    headers = {"User-agent": "Mozilla/5.0"}
+
+    response = requests.get(url, headers=headers)
+    if response.status_code != 200:
+        return await ctx.send("❌ Could not fetch subreddit. Make sure it exists and is public.")
+
+    data = response.json().get("data", {}).get("children", [])
+    if not data:
+        return await ctx.send("😕 No posts found in this subreddit.")
+
+    post = random.choice(data)["data"]
+
+    embed = discord.Embed(
+        title=post["title"],
+        url=f"https://reddit.com{post['permalink']}",
+        color=discord.Color.blurple()
+    )
+    if "url_overridden_by_dest" in post:
+        embed.set_image(url=post["url_overridden_by_dest"])
+    embed.set_footer(text=f"👍 {post['ups']} | 💬 {post['num_comments']} | r/{subreddit}")
+
+    await ctx.send(embed=embed)
+
+
+
+
+
+
+
+
+@bot.command()
+async def rr(ctx, subreddit: str):
+    """Fetches a random top image post from the specified subreddit."""
+    url = f"https://www.reddit.com/r/{subreddit}/top.json?limit=50&t=day"
+    headers = {"User-agent": "Mozilla/5.0"}
+
+    response = requests.get(url, headers=headers)
+    if response.status_code != 200:
+        return await ctx.send("❌ Could not fetch subreddit. Make sure it exists and is public.")
+
+    data = response.json().get("data", {}).get("children", [])
+    if not data:
+        return await ctx.send("😕 No posts found in this subreddit.")
+
+    # Filter out posts without an image URL
+    image_posts = [post for post in data if
+                   "url_overridden_by_dest" in post["data"] and post["data"]["url_overridden_by_dest"].endswith(
+                       (".jpg", ".jpeg", ".png", ".gif"))]
+
+    if not image_posts:
+        return await ctx.send("😕 No image posts found in this subreddit.")
+
+    post = random.choice(image_posts)["data"]
+
+    embed = discord.Embed(
+        title=post["title"],
+        url=f"https://reddit.com{post['permalink']}",
+        color=discord.Color.blurple()
+    )
+    embed.set_image(url=post["url_overridden_by_dest"])
+    embed.set_footer(text=f"👍 {post['ups']} | 💬 {post['num_comments']} | r/{subreddit}")
+
+    await ctx.send(embed=embed)
+
 
 # ─── Run Bot ─────────────────────────────────────────────────────────────────
 webserver.keep_alive()
