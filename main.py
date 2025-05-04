@@ -234,9 +234,8 @@ async def uptime(ctx):
     uptime_str = f"{int(days)}d {int(hours)}h {int(minutes)}m {int(seconds)}s"
     await ctx.send(f"⏱️ Bot has been running for: **{uptime_str}**")
 
-@bot.command()
+@bot.command(name='echo')
 async def echo(ctx, *, message: str):
-    """Repeats the user's message."""
     await ctx.send(message)
 
 
