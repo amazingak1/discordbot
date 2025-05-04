@@ -14,7 +14,8 @@ from discord.ext import commands, tasks
 from discord import app_commands
 import datetime
 import webserver
-
+import requests
+import random
 
 # ─── Start Time ─────────────────────────────────────────────────────────────
 start_time = datetime.datetime.utcnow()
