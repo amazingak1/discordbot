@@ -234,10 +234,6 @@ async def uptime(ctx):
     uptime_str = f"{int(days)}d {int(hours)}h {int(minutes)}m {int(seconds)}s"
     await ctx.send(f"⏱️ Bot has been running for: **{uptime_str}**")
 
-@bot.command(name='echo')
-async def echo(ctx, *, message: str):
-    await ctx.send(message)
-
 
 @bot.command()
 async def poll(ctx, question: str, *options: str):
