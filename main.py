@@ -405,9 +405,31 @@ async def r(ctx, subreddit: str):
 
     await ctx.send(embed=embed)
 
+@bot.command()
+async def food(ctx):
+    """Sends a random food image from r/foodporn"""
+    url = "https://www.reddit.com/r/foodporn/top.json?limit=50&t=day"
+    headers = {"User-agent": "Mozilla/5.0"}
+    response = requests.get(url, headers=headers)
 
+    if response.status_code != 200:
+        return await ctx.send("Failed to fetch food pics. Reddit might be down.")
 
+    posts = response.json()["data"]["children"]
+    post = random.choice(posts)["data"]
 
+    if post["over_18"]:
+        return await ctx.send("⚠️ NSFW content detected. Skipping.")
+
+    embed = discord.Embed(
+        title=post["title"],
+        url=f"https://reddit.com{post['permalink']}",
+        color=discord.Color.orange()
+    )
+    embed.set_image(url=post["url"])
+    embed.set_footer(text=f"👍 {post['ups']} | 💬 {post['num_comments']} | r/foodporn")
+
+    await ctx.send(embed=embed)
 
 
 
