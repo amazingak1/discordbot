@@ -235,14 +235,35 @@ async def uptime(ctx):
     await ctx.send(f"⏱️ Bot has been running for: **{uptime_str}**")
 
 @bot.command()
+async def echo(ctx, *, message: str):
+    """Repeats the user's message."""
+    await ctx.send(message)
+
+
+@bot.command()
 async def poll(ctx, question: str, *options: str):
     if len(options) < 2:
-        return await ctx.send("You need at least two options to create a poll.")
+        return await ctx.send("❗ You need at least two options to create a poll (e.g., `!poll Favorite color? Red Blue`).")
+    if len(options) > 9:
+        return await ctx.send("❗ You can only provide up to 9 options.")
+
+    emojis = ['1️⃣', '2️⃣', '3️⃣', '4️⃣', '5️⃣', '6️⃣', '7️⃣', '8️⃣', '9️⃣']
     
-    embed = discord.Embed(title=question, description="\n".join([f"{i+1}. {option}" for i, option in enumerate(options)]))
+    description = ""
+    for i, option in enumerate(options):
+        description += f"{emojis[i]} {option}\n"
+
+    embed = discord.Embed(
+        title=question,
+        description=description,
+        color=discord.Color.orange()
+    )
+    embed.set_footer(text="React below to vote!")
+
     message = await ctx.send(embed=embed)
     for i in range(len(options)):
-        await message.add_reaction(str(i+1))
+        await message.add_reaction(emojis[i])
+
 
 
 @bot.command(name="helpme")
@@ -304,7 +325,6 @@ async def helpme(ctx):
         name="💡 Gemini AI",
         value=(
             "`!ask <query>` ➔ Query the Gemini API for information.\n"
-            "`!resetchat` ➔ Clears the chat."
         ),
         inline=False
     )
@@ -312,14 +332,13 @@ async def helpme(ctx):
     embed.add_field(
         name="🧮 Utilities",
         value=(
-            "`!attendance <total> <attended>` → How many classes you can miss and still maintain 75%."
+            "`!at <total> <attended>` → How many classes you can miss and still maintain 75%."
         ),
         inline=False
     )
 
     embed.set_footer(text="Use these wisely! 🤖")
-    await ctx.author.send(embed=embed)
-    await ctx.send("📬 I've sent you a DM with all my commands!")
+    await ctx.send(embed=embed)
 
 
 # ─── Slash Commands ──────────────────────────────────────────────────────────
@@ -361,6 +380,7 @@ async def slash_meme(interaction: discord.Interaction):
     embed = discord.Embed(title=data["title"], color=discord.Color.random())
     embed.set_image(url=data["url"])
     await interaction.followup.send(embed=embed)
+    
 
 # ─── Run Bot ─────────────────────────────────────────────────────────────────
 webserver.keep_alive()
