@@ -245,21 +245,82 @@ async def poll(ctx, question: str, *options: str):
         await message.add_reaction(str(i+1))
 
 
-@bot.command()
+@bot.command(name="helpme")
 async def helpme(ctx):
     embed = discord.Embed(
-        title="📚 Bot Commands",
-        description="Here's a list of what I can do!",
+        title="Here's a list of what I can do!",
         color=discord.Color.blurple()
     )
-    embed.add_field(name="🎯 Basic", value="`!hello`, `!ping`, `!echo <msg>`, `!info`", inline=False)
-    embed.add_field(name="🧠 Gemini", value="`!ask <query>`", inline=False)
-    embed.add_field(name="📅 Scheduling", value="`!remindme`, `!schedule`", inline=False)
-    embed.add_field(name="📊 Attendance", value="`!attendance <total> <attended>`", inline=False)
-    embed.add_field(name="📬 Messaging", value="`!send`, `!dm`", inline=False)
-    embed.add_field(name="🕒 Uptime", value="`!uptime`", inline=False)
-    embed.set_footer(text="Use `/` for slash commands too!")
-    await ctx.send(embed=embed)
+
+    embed.add_field(
+        name="🎯 Basic Commands",
+        value=(
+            "`!hello` ➔ I greet you!\n"
+            "`!ping` ➔ Check bot latency.\n"
+            "`!uptime` ➔ See how long I've been running.\n"
+            "`!echo <message>` ➔ I repeat what you say.\n"
+            "`!info` ➔ Get a bot info embed."
+        ),
+        inline=False
+    )
+
+    embed.add_field(
+        name="📝 Polling",
+        value=(
+            "`!poll <question>` ➔ Create a poll with 👍👎.\n"
+            "`/poll` ➔ Slash command for polls with buttons and multiple options!"
+        ),
+        inline=False
+    )
+
+    embed.add_field(
+        name="⏰ Reminders & Scheduling",
+        value=(
+            "`!remind <time> <task>` ➔ Get reminded (e.g., 1h30m).\n"
+            "`!schedule <time> <event>` ➔ Schedule an announcement."
+        ),
+        inline=False
+    )
+
+    embed.add_field(
+        name="🎨 Fun Stuff",
+        value=(
+            "`!avatar <user>` ➔ View your or someone else's profile picture.\n"
+            "`!meme` ➔ Get a random meme from r/memes!"
+        ),
+        inline=False
+    )
+
+    embed.add_field(
+        name="📬 Messaging",
+        value=(
+            "`!send <#channel> <message>` ➔ Send a custom message (admin only).\n"
+            "`/send` ➔ Slash command to send message to a channel."
+        ),
+        inline=False
+    )
+
+    embed.add_field(
+        name="💡 Gemini AI",
+        value=(
+            "`!ask <query>` ➔ Query the Gemini API for information.\n"
+            "`!resetchat` ➔ Clears the chat."
+        ),
+        inline=False
+    )
+
+    embed.add_field(
+        name="🧮 Utilities",
+        value=(
+            "`!attendance <total> <attended>` → How many classes you can miss and still maintain 75%."
+        ),
+        inline=False
+    )
+
+    embed.set_footer(text="Use these wisely! 🤖")
+    await ctx.author.send(embed=embed)
+    await ctx.send("📬 I've sent you a DM with all my commands!")
+
 
 # ─── Slash Commands ──────────────────────────────────────────────────────────
 # @tree.command(name="send", description="Send a message to any channel")
