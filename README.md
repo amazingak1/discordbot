@@ -32,7 +32,7 @@ Includes features like polls, reminders, memes, subreddit integration, Gemini AI
 
 ### 🎨 Fun & Media
 - `/meme` — Sends a random meme from the r/FingMemes subreddit.
-- `!avatar [user]` — Shows avatar of the mentioned user (or yours).
+- `/avatar [user]` — Shows avatar of the mentioned user (or yours).
 - `!r <subreddit> [count]` — Sends images from a specified subreddit.
 - `!food` — Delicious food pics from the subreddit.
 
@@ -63,7 +63,7 @@ Includes features like polls, reminders, memes, subreddit integration, Gemini AI
 4. Run the bot:
    ```bash
    python bot.py
-
+---
 # 📌 To-Do / Upcoming Features
 * Custom prefix support
 * Logging system
