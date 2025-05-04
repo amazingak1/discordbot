@@ -6,7 +6,7 @@ I'm currently looking for someone to help implement a ModMail system in this Dis
 * Allow moderators to reply from the server channel, and the bot should forward messages back to the user's DMs.
 * Optional: Support message logging, user blacklist, or mod-only reply options.
 If you're interested in contributing or have questions, feel free to open an issue or submit a pull request!
-
+---
 
 # 🤖 MultiPurpose Discord Bot
 
