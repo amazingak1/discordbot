@@ -1,3 +1,13 @@
+## 🛠️ Looking for Contributors: ModMail Feature
+I'm currently looking for someone to help implement a ModMail system in this Discord bot.
+
+###🔧 Feature Description:
+* Allow users to DM the bot and create a private thread or channel in a server (ModMail).
+* Allow moderators to reply from the server channel, and the bot should forward messages back to the user's DMs.
+* Optional: Support message logging, user blacklist, or mod-only reply options.
+If you're interested in contributing or have questions, feel free to open an issue or submit a pull request!
+
+
 # 🤖 MultiPurpose Discord Bot
 
 A powerful and customizable multipurpose Discord bot built using `discord.py`.  
