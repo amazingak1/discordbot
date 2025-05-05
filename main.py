@@ -330,6 +330,14 @@ async def helpme(ctx):
 
     embed.set_footer(text="Use these wisely! 🤖")
     await ctx.send(embed=embed)
+@bot.command()
+@commands.is_owner()
+async def servers(ctx):
+    guilds = bot.guilds
+    response = "\n".join(f"{i+1}. {guild.name} (ID: {guild.id})" for i, guild in enumerate(guilds))
+    if len(response) > 1900:  # To avoid hitting Discord's message limit
+        response = response[:1900] + "\n...and more."
+    await ctx.send(f"I'm currently in {len(guilds)} servers:\n{response}")
 
 
 # ─── Slash Commands ──────────────────────────────────────────────────────────
