@@ -256,11 +256,8 @@ async def poll(ctx, question: str, *options: str):
         await message.add_reaction(emojis[i])
 
 import akinator
-from discord.ext import commands
-import discord
-
 @bot.command()
-async def akinator(ctx):
+async def aki(ctx):  # renamed from `akinator` to `aki`
     aki = akinator.Akinator()
     await ctx.send("🧠 Starting Akinator...")
 
