@@ -255,6 +255,45 @@ async def poll(ctx, question: str, *options: str):
     for i in range(len(options)):
         await message.add_reaction(emojis[i])
 
+import akinator
+from discord.ext import commands
+import discord
+
+@bot.command()
+async def akinator(ctx):
+    aki = akinator.Akinator()
+    await ctx.send("🧠 Starting Akinator...")
+
+    try:
+        q = aki.start_game()
+    except Exception as e:
+        return await ctx.send(f"Failed to start game: {e}")
+
+    def check(m):
+        return m.author == ctx.author and m.channel == ctx.channel
+
+    while aki.progression <= 80:
+        await ctx.send(f"❓ {q} (yes/y, no/n, idk, probably/p, probably not/pn)")
+        try:
+            msg = await bot.wait_for("message", check=check, timeout=60.0)
+        except:
+            await ctx.send("⏰ Timed out.")
+            return
+
+        a = msg.content.lower()
+        if a not in ["yes", "y", "no", "n", "idk", "probably", "p", "probably not", "pn"]:
+            await ctx.send("❗ Please answer with yes, no, idk, probably, or probably not.")
+            continue
+
+        try:
+            q = aki.answer(a)
+        except akinator.AkiNoQuestions:
+            break
+
+    aki.win()
+    await ctx.send(f"🎉 I guess: **{aki.first_guess['name']}**!\n{aki.first_guess['description']}")
+    await ctx.send(aki.first_guess['absolute_picture_path'])
+
 
 
 @bot.command(name="helpme")
