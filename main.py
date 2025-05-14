@@ -156,7 +156,7 @@ async def info(ctx):
         description="Details about this bot.",
         color=discord.Color.green()
     )
-    embed.add_field(name="Author", value="_amazing_.", inline=False)
+    embed.add_field(name="Author", value="`_amazing_.`", inline=False)
     embed.set_footer(text="Thank you for using the bot!")
     await ctx.send(embed=embed)
 
