@@ -152,13 +152,21 @@ async def echo(interaction: discord.Interaction, message: str):
 @bot.command()
 async def info(ctx):
     embed = discord.Embed(
-        title="🤖 Bot Info",
-        description="Details about this bot.",
+        title="🤖 Bot Information",
+        description="Your friendly multipurpose assistant bot!",
         color=discord.Color.green()
     )
-    embed.add_field(name="Author", value="`_amazing_.`", inline=False)
+    embed.add_field(name="👑 Author", value="`_amazing_.`", inline=True)
+    embed.add_field(name="📅 Uptime", value=f"Since {start_time.strftime('%Y-%m-%d %H:%M:%S')} UTC", inline=True)
+    embed.add_field(name="📍 Prefixes", value="`!`, `` ` ``", inline=True)
+    embed.add_field(name="📌 Features", value="Moderation, Uptime, Fun, Gemini AI, Reminders, Polls, Attendance & more", inline=False)
+    embed.add_field(name="🆘 Support", value="DM me for support ", inline=False)
     embed.set_footer(text="Thank you for using the bot!")
+    embed.timestamp = datetime.datetime.utcnow()
     await ctx.send(embed=embed)
+
+
+
 
 @bot.command(aliases=["attendance", "at"])
 async def attendance_cmd(ctx, total_classes: int, attended_classes: int):
@@ -180,7 +188,7 @@ async def ask(ctx, *, question: str):
         async with ctx.typing():
             loop = asyncio.get_event_loop()
             model = genai.GenerativeModel('gemini-2.0-flash')
-            response = await loop.run_in_executor(None, model.generate_content, question)
+            response = await loop.run_in_executor(None, model.generate_content, "Answer within 2000 chracters"+question)
             await ctx.send(response.text)
     except Exception as e:
         await ctx.send(f"❌ Error: {e}")
