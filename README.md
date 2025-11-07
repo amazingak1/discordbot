@@ -77,3 +77,4 @@ Includes features like polls, reminders, memes, subreddit integration, Gemini AI
 * Flask (optional web features)
 * Google Gemini API
 * Reddit JSON API
+thhanks
